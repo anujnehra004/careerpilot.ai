@@ -269,17 +269,6 @@ npm run build
 
 ---
 
-## Contributing
-
-Contributions, suggestions, and bug reports are welcome.
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make your changes and test them.
-4. Open a pull request with a clear description of the change.
-
----
-
 ## License
 
 This project is distributed under the MIT License.
@@ -288,5 +277,5 @@ This project is distributed under the MIT License.
 
 <p align="center">
   <strong>CareerPilot AI</strong><br>
-  Helping you move from application-ready to interview-ready.
+  Your journey towards smarter career preparation starts here.
 </p>
