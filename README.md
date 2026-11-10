@@ -1,256 +1,292 @@
-# CareerPilot AI — Intelligent Resume Analyzer & Placement Assistant
+# CareerPilot AI
+### AI-Powered Resume Analysis & Career Preparation Platform
 
-> **"Your Resume Deserves More Than a Guess. Get Career-Ready with AI."**
+<p align="center">
+  <strong>Build a stronger resume. Understand your skill gaps. Prepare with confidence.</strong>
+</p>
 
-## 🌐 Live Demo
+<p align="center">
+  <a href="https://careerpilota.netlify.app"><img src="https://img.shields.io/badge/Live%20Demo-Visit%20CareerPilot-16a34a?style=for-the-badge" alt="Live Demo"></a>
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19">
+  <img src="https://img.shields.io/badge/TypeScript-7-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/FastAPI-Python-009688?style=for-the-badge&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/AI-Google%20Gemini-4285F4?style=for-the-badge&logo=googlegemini&logoColor=white" alt="Google Gemini">
+</p>
 
-**Try CareerPilot AI:** [https://careerpilota.netlify.app](https://careerpilota.netlify.app)
+CareerPilot AI is a full-stack career assistant designed to help students, graduates, and job seekers improve their resumes and prepare for recruitment. It brings resume analysis, job-description matching, AI-assisted resume improvement, mock interviews, and skill-gap guidance into one platform.
 
----
-
-CareerPilot AI is an industry-grade full-stack career platform engineered to help students, recent graduates, and software engineers break through Applicant Tracking Systems (ATS) and excel in technical, HR, and behavioral interviews.
-
----
-
-## 🌟 Key Highlights & Capabilities
-
-- **Algorithmic ATS Parseability Engine**: Evaluates resume formatting, hierarchy, missing sections, and keyword density using PyMuPDF and python-docx.
-- **Google Gemini 3.8 Flash Integration**: Leverages the official `google-genai` Python SDK with strict Pydantic structured output schemas.
-- **Job Description Matcher**: Analyzes job postings line-by-line, highlighting matching vs. missing skills, qualification gaps, and company-specific tailoring strategies.
-- **Resume Improvement Studio**: Side-by-side interactive bullet point rewrite studio. Injects high-impact action verbs and quantified metrics (e.g. Google X-Y-Z formula) without fabricating false credentials.
-- **Interactive AI Mock Interviews**: Dynamic sequential question flow (Technical, HR, Behavioral STAR, and Project Deep Dives) with instant grading, model benchmark answers, and tactical feedback.
-- **Career Skill Gap Analyzer & Learning Roadmap**: Identifies unaddressed technical and soft competencies and renders an interactive 4-phase learning curriculum.
-- **Enterprise-Grade Security**: PostgreSQL Row Level Security (RLS) migration ensuring each candidate can only access their own resumes, evaluations, and mock sessions.
+**Live application:** [https://careerpilota.netlify.app](https://careerpilota.netlify.app)
 
 ---
 
-## 🏗️ Technology Stack
+## Contents
 
-| Layer | Technologies |
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [How It Works](#how-it-works)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Environment Variables](#environment-variables)
+- [API Documentation](#api-documentation)
+- [Database Setup](#database-setup)
+- [Deployment](#deployment)
+- [Testing](#testing)
+
+---
+
+## Features
+
+| Feature | Description |
 |---|---|
-| **Frontend** | React 19, TypeScript, Vite, Tailwind CSS, Lucide React, Recharts, Framer Motion |
-| **Backend** | Python 3.14+, FastAPI, Uvicorn, Pydantic v2, PyMuPDF (fitz), python-docx |
-| **AI Engine** | Google Gemini API (`gemini-3.8-flash`) via the official `google-genai` SDK |
-| **Database & Auth** | Supabase (PostgreSQL 15+, Row Level Security, Supabase Auth, JWT verification) |
-| **Development** | In-memory zero-config fallback store for instant local testing |
+| **Resume Analysis** | Reviews resume content, structure, ATS readability, keywords, strengths, and areas to improve. |
+| **Job Description Matcher** | Compares a resume with a job description and highlights relevant skills and potential gaps. |
+| **Resume Improvement Studio** | Helps rewrite resume bullet points with clearer language, stronger action verbs, and measurable impact where information is provided. |
+| **AI Mock Interviews** | Practice technical, HR, behavioral, and project-based interview questions with feedback on responses. |
+| **Skill-Gap Analyzer** | Identifies skills to work on and suggests a structured learning roadmap. |
+| **Career Dashboard** | Brings key career-preparation activities and progress into one place. |
+| **Profile & History** | Manage candidate details and review previous activity. |
+
+> AI-generated suggestions are intended to support your preparation. Review all generated content for accuracy before using it in an application.
 
 ---
 
-## 📁 Project Architecture
+## Technology Stack
 
-```
-careerpilot-ai/
+| Layer | Tools and Technologies |
+|---|---|
+| **Frontend** | React 19, TypeScript, Vite |
+| **Styling & UI** | Tailwind CSS, Lucide React, Framer Motion |
+| **Charts** | Recharts |
+| **Backend** | Python, FastAPI, Uvicorn, Pydantic |
+| **AI Integration** | Google Gemini API, `google-genai` |
+| **Document Processing** | PyMuPDF, python-docx |
+| **Authentication & Database** | Supabase Auth, PostgreSQL, Row Level Security |
+| **API Validation** | FastAPI / Swagger UI |
+
+---
+
+## How It Works
+
+1. **Add your resume** — Upload your resume for parsing and analysis.
+2. **Review your profile** — Explore the analysis, strengths, and improvement areas.
+3. **Match a role** — Compare your resume with a job description to understand relevant skills and gaps.
+4. **Improve your resume** — Use the improvement studio to refine selected content.
+5. **Practice interviews** — Answer role-relevant questions and review the feedback.
+6. **Build your skills** — Use the suggested roadmap to plan your next steps.
+
+---
+
+## Project Structure
+
+```text
+careerpilot.ai/
 ├── backend/
 │   ├── app/
-│   │   ├── api/
-│   │   │   ├── resumes.py        # /api/resumes/upload, /analyze, list, delete
-│   │   │   ├── jobs.py           # /api/jobs/match, matches history
-│   │   │   ├── improve.py        # /api/resume/improve
-│   │   │   ├── interview.py      # /api/interview/start, /answer, history
-│   │   │   ├── skills.py         # /api/skills/profile, toggle
-│   │   │   ├── dashboard.py      # /api/dashboard/stats
-│   │   │   └── profile.py        # /api/profile GET & PUT
-│   │   ├── core/
-│   │   │   ├── config.py         # App environment & secret settings
-│   │   │   └── security.py       # Supabase bearer token & user resolver
-│   │   ├── models/
-│   │   │   └── schemas.py        # Pydantic structured schemas
-│   │   ├── services/
-│   │   │   ├── gemini_service.py # Gemini 3.8 Flash structured API client
-│   │   │   ├── parser_service.py # PyMuPDF & python-docx extractor
-│   │   │   └── supabase_service.py # DB persistence & demo repository
-│   │   ├── utils/
-│   │   │   └── logger.py
-│   │   └── main.py               # FastAPI application & middleware
+│   │   ├── api/          # Resume, jobs, interview, skills, profile APIs
+│   │   ├── core/         # Configuration and security
+│   │   ├── models/       # Pydantic schemas
+│   │   ├── services/     # Gemini, parsing, and data services
+│   │   ├── utils/        # Shared utilities
+│   │   └── main.py       # FastAPI application
 │   ├── requirements.txt
-│   ├── test_api.py               # End-to-end 9-step test pipeline
-│   ├── .env.example
-│   └── .env
+│   └── .env.example
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
 │   │   ├── context/
-│   │   │   └── AuthContext.tsx   # Supabase & demo session state
 │   │   ├── layouts/
-│   │   │   └── AppLayout.tsx     # Responsive sidebar & status topbar
 │   │   ├── pages/
-│   │   │   ├── LandingPage.tsx   # Conversion hero, preview & FAQ
-│   │   │   ├── LoginPage.tsx     # Auth login with demo auto-fill
-│   │   │   ├── SignUpPage.tsx    # User registration
-│   │   │   ├── ForgotPasswordPage.tsx
-│   │   │   ├── DashboardPage.tsx # Metric cards, charts & quick actions
-│   │   │   ├── ResumeUploadPage.tsx # PDF/DOCX dropzone & parser
-│   │   │   ├── ResumeAnalysisPage.tsx # ATS score, breakdown & strengths
-│   │   │   ├── JobMatcherPage.tsx   # JD comparison & skill overlap
-│   │   │   ├── ResumeImprovePage.tsx # Side-by-side rewriting studio
-│   │   │   ├── InterviewPrepPage.tsx # Interactive AI mock interviews
-│   │   │   ├── SkillGapPage.tsx     # Roadmap & acquired skill tracker
-│   │   │   ├── HistoryPage.tsx      # Past analyses & deletion
-│   │   │   ├── ProfilePage.tsx      # Candidate details & target roles
-│   │   │   └── SettingsPage.tsx     # Gemini & Supabase connection audits
 │   │   ├── services/
-│   │   │   ├── api.ts            # Typed REST client
-│   │   │   └── supabase.ts       # Supabase JS client
-│   │   ├── types/
-│   │   │   └── index.ts          # TypeScript interfaces
-│   │   ├── App.tsx               # Client router & navigation
-│   │   └── index.css             # Dark neon sleek styling
-│   ├── package.json
-│   └── vite.config.ts
+│   │   └── types/
+│   └── package.json
 ├── supabase/
-│   └── migrations/
-│       └── 20261104_init.sql     # Full SQL schema with 9 tables & RLS
-├── .env.example
-├── .gitignore
+│   └── migrations/       # Database schema and RLS policies
 └── README.md
 ```
 
 ---
 
-## ⚡ Quick Start & Local Setup
+## Getting Started
 
-> **🚀 One‑Click Setup**
-> 
-> The project works out‑of‑the‑box with **SQLite persistence** – no Supabase credentials required. All data (resumes, analyses, job matches, interview sessions, profile info) is stored in `backend/app/careerpilot.db` and survives server restarts.
->
-> If you have a Supabase instance you can still connect it by filling the values in `.env`. The app will automatically switch to Supabase when the `SUPABASE_URL` environment variable is present.
->
-> The unified server serves both the React SPA and the FastAPI API on **http://localhost:8000/**. No extra ports are needed.
+Follow these steps to run the project locally.
 
-### 1. Prerequisites
-- **Node.js**: v18+ (tested on v24)
-- **Python**: v3.10+ (tested on v3.14)
-- **Git**
+### Prerequisites
 
-### 2. Backend Setup
+- [Git](https://git-scm.com/)
+- [Node.js](https://nodejs.org/) 18 or later
+- [Python](https://www.python.org/) 3.10 or later
+- A Google Gemini API key for live AI-powered responses
+- A Supabase project if you want to use Supabase authentication and database features
+
+### 1. Clone the repository
 
 ```bash
-cd careerpilot-ai/backend
+git clone https://github.com/anujnehra004/careerpilot.ai.git
+cd careerpilot.ai
+```
 
-# Create virtual environment
-python -m venv venv
+### 2. Configure and start the backend
 
-# Activate virtual environment
-# Windows PowerShell:
-.\venv\Scripts\Activate.ps1
-# (Or on Windows without activating venv: use `.\venv\Scripts\python.exe` directly)
-# macOS / Linux:
-source venv/bin/activate
+```bash
+cd backend
+
+# Create a virtual environment
+python -m venv .venv
+
+# Activate it (Windows PowerShell)
+.venv\Scripts\Activate.ps1
+
+# macOS / Linux
+# source .venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run SQLite persistence tests
-python test_db_persistence.py
+# Create your local environment file
+# Windows:
+copy .env.example .env
+# macOS / Linux:
+# cp .env.example .env
 
-# Start Unified FastAPI server (serves both React frontend & API on port 8000)
-# Option A (Active venv):
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-# Option B (Direct Windows command in VS Code terminal):
-.\venv\Scripts\python.exe -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+# Start the API
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-The API will be live at:
-- **Root**: `http://localhost:8000/`
-- **Swagger Interactive API Docs**: `http://localhost:8000/docs`
-- **Health Check**: `http://localhost:8000/api/health`
+The backend will be available at `http://localhost:8000`.
 
-### 3. Frontend Setup
+### 3. Start the frontend
+
+Open a **second terminal** from the project root:
 
 ```bash
-cd careerpilot-ai/frontend
-
-# Install dependencies
+cd frontend
 npm install
-
-# Start Vite development server
 npm run dev
 ```
 
-Open `http://localhost:5173` in your browser.
+Vite will display the local frontend URL in the terminal (usually `http://localhost:5173`).
 
 ---
 
-## 🔑 Environment Configuration
+## Environment Variables
 
-Copy `.env.example` to `backend/.env`:
+Configure the backend in `backend/.env`. Use the example file as a template:
 
 ```env
-# Server
 ENVIRONMENT=development
-PORT=8000
 HOST=0.0.0.0
+PORT=8000
 
-# Google Gemini API
-# Get your free key at: https://aistudio.google.com/
-GEMINI_API_KEY=your_actual_gemini_api_key
+# Google Gemini
+GEMINI_API_KEY=your_gemini_api_key
 GEMINI_MODEL=gemini-3.8-flash
 
-# Supabase PostgreSQL (Optional for local testing; in-memory store is active by default)
-# Get credentials at: https://supabase.com/
+# Supabase (configure when using Supabase services)
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_KEY=your_supabase_anon_key
 SUPABASE_JWT_SECRET=your_supabase_jwt_secret
 ```
 
-> **Note on Zero-Config Demo Mode:**
-> If `GEMINI_API_KEY` or `SUPABASE_URL` are not yet supplied, CareerPilot AI will automatically operate in **Intelligent Demo Mode**. It generates realistic, domain-accurate scoring data and displays an informative banner so you can test every button and page immediately!
+Keep real credentials private. Do not commit your `.env` file or expose secret keys in frontend code.
+
+The backend includes fallback behavior for development when external services are not configured. Features that depend on Gemini or Supabase require the corresponding credentials for live integration.
 
 ---
 
-## 🗄️ Supabase PostgreSQL Setup & RLS
+## API Documentation
 
-When connecting your Supabase project:
-1. Create a project at [supabase.com](https://supabase.com/).
-2. Navigate to the **SQL Editor** tab.
-3. Open `careerpilot-ai/supabase/migrations/20261104_init.sql`.
-4. Run the script. This creates:
-   - `profiles` (with automatic trigger upon auth signup)
-   - `resumes`
-   - `resume_analyses`
-   - `job_descriptions`
-   - `job_matches`
-   - `interview_sessions`
-   - `interview_questions`
-   - `skill_profiles`
-   - `learning_progress`
-   - Strict Row Level Security (`auth.uid() = user_id`) policies on all tables.
+With the backend running, open:
+
+- **Swagger UI:** [http://localhost:8000/docs](http://localhost:8000/docs)
+- **ReDoc:** [http://localhost:8000/redoc](http://localhost:8000/redoc)
+- **Health Check:** [http://localhost:8000/api/health](http://localhost:8000/api/health)
+
+The API is organized around resume analysis, job matching, resume improvement, interview preparation, skills, dashboard data, and candidate profiles.
 
 ---
 
-## 🧪 Automated Testing Checklist
+## Database Setup
 
-Run `python test_api.py` to verify:
+Supabase is supported for authentication and PostgreSQL-backed data storage.
 
-- [x] **Health Audit**: Returns online status and API key configuration flag.
-- [x] **Dashboard Metrics**: Computes aggregate resume count, latest ATS score, and recommendations.
-- [x] **Resume Upload & Parsing**: Creates a real PDF in-memory, parses text with PyMuPDF, and extracts skills, education, and experience.
-- [x] **Gemini Resume Analysis**: Verifies overall score (/100), ATS parseability, quality audit, strengths, weaknesses, and prioritized recommendations.
-- [x] **Job Matching Engine**: Compares resume text to a job description, computing compatibility and skill overlap.
-- [x] **Resume Improvement Studio**: Rewrites bullet points with strong action verbs and metrics placeholders.
-- [x] **AI Mock Interview Simulator**: Generates sequential questions and grades responses with benchmark model answers.
-- [x] **Career Skill Gap Analyzer**: Compares skills against target roles and constructs a 4-phase curriculum.
-- [x] **Profile Management**: Tests profile updates and career objective persistence.
-- [x] **Frontend Production Build**: `tsc -b && vite build` succeeds with zero errors.
+1. Create a project at [Supabase](https://supabase.com/).
+2. Add the project URL and API credentials to `backend/.env`.
+3. Open the Supabase SQL Editor.
+4. Run the migration in `supabase/migrations/`.
+5. Review the Row Level Security policies before using the database with real user data.
+
+If Supabase is not configured, the backend reports and uses its development fallback mode. Do not treat fallback/demo data as production storage.
 
 ---
 
-## 🚀 Deployment Instructions
+## Deployment
 
-### Frontend (Vercel / Netlify / Cloudflare Pages)
-1. Push repository to GitHub.
-2. Link the `frontend/` directory to Vercel or Netlify.
-3. Build command: `npm run build`
-4. Output directory: `dist`
-5. Set environment variable: `VITE_API_URL=https://your-backend-url.com`
+### Frontend — Netlify
 
-### Backend (Railway / Render / Google Cloud Run)
-1. Connect the `backend/` directory to Railway or Render.
-2. Build command: `pip install -r requirements.txt`
-3. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-4. Set environment variables: `GEMINI_API_KEY`, `SUPABASE_URL`, `SUPABASE_KEY`.
+The frontend is deployed here:
+
+**[https://careerpilota.netlify.app](https://careerpilota.netlify.app)**
+
+For a new Netlify deployment, connect this GitHub repository and configure the frontend project settings:
+
+- **Base directory:** `frontend`
+- **Build command:** `npm run build`
+- **Publish directory:** `dist`
+
+Configure any frontend environment variables required by your deployment.
+
+### Backend
+
+The FastAPI backend can be deployed to a Python hosting provider such as Railway, Render, or another service that supports ASGI applications.
+
+Typical start command:
+
+```bash
+uvicorn app.main:app --host 0.0.0.0 --port $PORT
+```
+
+Set the required Gemini and Supabase environment variables in the hosting provider's environment settings. Configure the frontend to call the deployed backend API.
 
 ---
 
-## ⚖️ License
-MIT License. Built for students and job seekers worldwide.
+## Testing
+
+The repository includes backend API tests and a frontend production build script.
+
+Run the backend test file from the `backend` directory when its test dependencies and configuration are available:
+
+```bash
+python test_api.py
+```
+
+Check the frontend production build:
+
+```bash
+cd frontend
+npm install
+npm run build
+```
+
+---
+
+## Contributing
+
+Contributions, suggestions, and bug reports are welcome.
+
+1. Fork the repository.
+2. Create a feature branch.
+3. Make your changes and test them.
+4. Open a pull request with a clear description of the change.
+
+---
+
+## License
+
+This project is distributed under the MIT License.
+
+---
+
+<p align="center">
+  <strong>CareerPilot AI</strong><br>
+  Helping you move from application-ready to interview-ready.
+</p>
