@@ -2,6 +2,12 @@
 
 > **"Your Resume Deserves More Than a Guess. Get Career-Ready with AI."**
 
+## 🌐 Live Demo
+
+**Try CareerPilot AI:** [https://careerpilota.netlify.app](https://careerpilota.netlify.app)
+
+---
+
 CareerPilot AI is an industry-grade full-stack career platform engineered to help students, recent graduates, and software engineers break through Applicant Tracking Systems (ATS) and excel in technical, HR, and behavioral interviews.
 
 ---
